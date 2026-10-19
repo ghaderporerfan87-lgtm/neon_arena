@@ -1,5 +1,5 @@
 
-name: Build Android APK
+name: Build Neon Arena Android
 
 on:
   workflow_dispatch:
@@ -11,7 +11,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Show source files
+      - name: Check Android build requirements
         run: |
-          ls -la
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build g++ git zip unzip
           test -f neon_arena.cpp
+          echo "Source file found"
