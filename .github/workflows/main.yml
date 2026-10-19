@@ -1,9 +1,4 @@
-mkdir --parents android/sdk android/build assets include lib/armeabi-v7a lib/arm64-v8a lib/x86 lib/x86_64 src
-cd android/build
-mkdir --parents obj dex res/values src/com/raylib/game assets
-mkdir --parents lib/armeabi-v7a lib/arm64-v8a lib/x86 lib/x86_64
-mkdir --parents res/drawable-ldpi res/drawable-mdpi res/drawable-hdpi res/drawable-xhdpi
-cd ../..
+
 name: Build Neon Arena Android
 
 on:
@@ -12,13 +7,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check Android build requirements
+      - name: Install build tools
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake ninja-build g++ git zip unzip
+
+      - name: Check source file
+        run: |
+          ls -la
           test -f neon_arena.cpp
           echo "Source file found"
